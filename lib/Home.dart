@@ -64,29 +64,101 @@ class Home extends StatelessWidget {
             child: Container(
                 margin: EdgeInsets.all(10),
                 child: Obx(() => Text(
-                      "Answer :  ${m.ans.value}",
+                      "Answer :  ${m.ans}",
                       style: TextStyle(
                           color: Colors.red,
                           fontSize: 30,
                           fontWeight: FontWeight.bold),
                     ))),
           ),
-          ElevatedButton(
-              style: ElevatedButton.styleFrom(primary: Colors.blueGrey),
-              onPressed: () {
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Container(
+                margin: EdgeInsets.all(10),
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(primary: Colors.blueGrey),
+                    onPressed: () {
 
-                String First = first.text;
-                String Second = second.text;
+                      String First = first.text;
+                      String Second = second.text;
 
-                m.plus(First, Second);
-              },
-              child: Text(
-                "+",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20),
-              ))
+                      m.plus(First, Second);
+                    },
+                    child: Text(
+                      "+",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20),
+                    )),
+              ),
+              Container(
+                margin: EdgeInsets.all(10),
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(primary: Colors.blueGrey),
+                    onPressed: () {
+
+                      String First = first.text;
+                      String Second = second.text;
+
+                      m.minus(First, Second);
+                    },
+                    child: Text(
+                      "-",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20),
+                    )),
+              ),
+            ],
+          ),
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Container(
+                margin: EdgeInsets.all(10),
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(primary: Colors.blueGrey),
+                    onPressed: () {
+
+                      String First = first.text;
+                      String Second = second.text;
+
+                      m.multi(First, Second);
+                    },
+                    child: Text(
+                      "*",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20),
+                    )),
+              ),
+              Container(
+                margin: EdgeInsets.all(10),
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(primary: Colors.blueGrey),
+                    onPressed: () {
+
+                      String First = first.text;
+                      String Second = second.text;
+
+                      m.div(First, Second);
+                    },
+                    child: Text(
+                      "/",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20),
+                    )),
+              ),
+            ],
+          ),
+
         ],
       ),
     );
@@ -95,7 +167,7 @@ class Home extends StatelessWidget {
 
 class Model extends GetxController {
 
-  RxInt ans = 0.obs;
+  RxDouble ans = 0.0.obs;
 
   void plus(
     String First,
@@ -111,8 +183,56 @@ class Model extends GetxController {
       b = double.parse(Second);
     }
 
-    int c = (a + b) as int;
-    ans = c.obs;
+    double c = a + b;
+    ans.value = c;
+    print(ans);
+  }
+
+  void minus(String First, String Second) {
+    double a = 0;
+    double b = 0;
+
+    if (First.trim().isNotEmpty) {
+      a = double.parse(First);
+    }
+    if (Second.trim().isNotEmpty) {
+      b = double.parse(Second);
+    }
+
+    double c = a - b;
+    ans.value = c;
+    print(ans);
+  }
+
+  void multi(String First, String Second) {
+    double a = 0;
+    double b = 0;
+
+    if (First.trim().isNotEmpty) {
+      a = double.parse(First);
+    }
+    if (Second.trim().isNotEmpty) {
+      b = double.parse(Second);
+    }
+
+    double c = a * b;
+    ans.value = c;
+    print(ans);
+  }
+
+  void div(String First, String Second) {
+    double a = 0;
+    double b = 0;
+
+    if (First.trim().isNotEmpty) {
+      a = double.parse(First);
+    }
+    if (Second.trim().isNotEmpty) {
+      b = double.parse(Second);
+    }
+
+    double c = a / b;
+    ans.value = c;
     print(ans);
   }
 }
